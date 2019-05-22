@@ -2,6 +2,7 @@ stages:
   - build
   - upload
   - test
+  - deploy
 
 build_project:
   stage: build
@@ -23,6 +24,15 @@ upload_project:
 
 test_project:
   stage: test
+  only:
+    - master
+  tags:
+    - dockerindependent
+  script:
+    - docker run --name test_hello_node -dit registry.carsworld.id/ahmad/hello-node:buildlocal npm test
+
+deploy_project:
+  stage: deploy
   only:
     - master
   tags:
