@@ -11,8 +11,5 @@ COPY . .
 # install dependencies
 RUN npm install
 
-# open port 3000
+# open port
 EXPOSE 3000
-
-# run server application
-CMD ["npm", "start"]

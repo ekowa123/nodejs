@@ -29,4 +29,4 @@ test_project:
     - dockerindependent
   when: manual
   script:
-    - docker run --name ahmad_hello_node -dit -p 8880:3000 registry.carsworld.id/ahmad/hello-node:buildlocal /bin/sh
+    - docker run --name ahmad_hello_node -dit -p 8880:3000 registry.carsworld.id/ahmad/hello-node:buildlocal npm start
