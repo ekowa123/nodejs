@@ -29,7 +29,7 @@ test_project:
   tags:
     - dockerindependent
   script:
-    - docker run --name test_hello_node -it registry.carsworld.id/ahmad/hello-node:buildlocal npm test
+    - docker run --name test_hello_node -it registry.carsworld.id/ahmad/hello-node:buildlocal /bin/sh npm test
 
 deploy_project:
   stage: deploy
