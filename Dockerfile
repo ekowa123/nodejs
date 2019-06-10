@@ -13,3 +13,6 @@ RUN npm install
 
 # open port
 EXPOSE 3000
+
+# start application
+CMD ["npm", "start"]
