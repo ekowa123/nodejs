@@ -3,7 +3,8 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Ahmad Ardiansyah' });
+  //res.render('index', { title: 'Ahmad Ardiansyah' });
+  res.json({status: 200, message: 'Welcome to Carsworld Digital Indonesia.'})
 });
 
 module.exports = router;
