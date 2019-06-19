@@ -50,4 +50,4 @@ autotest_project:
     - katalon
   #when: manual
   script:
-    - cd /home/ahmad/Katalon_Studio_Linux_64-6.2.0 && ./katalon -noSplash  -runMode=console -consoleLog -projectPath="/home/ahmad/Katalon Studio/ArdimasyuWeb/ArdimasyuWeb.prj" -retry=0 -testSuitePath="Test Suites/Signin01" -browserType="Chrome (headless)"
+    - cd /home/ahmad/Katalon_Studio_Linux_64-6.2.0 && ./katalon -noSplash  -runMode=console -consoleLog -projectPath="/home/ahmad/Katalon Studio/ArdimasyuWeb/ArdimasyuWeb.prj" -retry=0 -testSuitePath="Test Suites/Signin01" -browserType="Firefox"
