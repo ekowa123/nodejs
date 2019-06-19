@@ -1,8 +1,8 @@
 stages:
   - build
-  - upload
-  - test
-  - deploy
+  #- upload
+  #- test
+  #- deploy
   - autotest
 
 build_project:
@@ -14,33 +14,33 @@ build_project:
   script:
     - docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
 
-upload_project:
-  stage: upload
-  only:
-    - master
-  tags:
-    - dockerindependent
-  script:
-    - docker push registry.carsworld.id/ahmad/hello-node:buildlocal
+#upload_project:
+  #stage: upload
+  #only:
+    #- master
+  #tags:
+    #- dockerindependent
+  #script:
+    #- docker push registry.carsworld.id/ahmad/hello-node:buildlocal
 
-test_project:
-  stage: test
-  only:
-    - master
-  tags:
-    - dockerindependent
-  script:
-    - docker run --name test_hello_node -dit registry.carsworld.id/ahmad/hello-node:buildlocal sh
+#test_project:
+  #stage: test
+  #only:
+    #- master
+  #tags:
+    #- dockerindependent
+  #script:
+    #- docker run --name test_hello_node -dit registry.carsworld.id/ahmad/hello-node:buildlocal sh
 
-deploy_project:
-  stage: deploy
-  only:
-    - master
-  tags:
-    - dockerindependent
+#deploy_project:
+  #stage: deploy
+  #only:
+    #- master
+  #tags:
+    #- dockerindependent
   #when: manual
-  script:
-    - docker run --name ahmad_hello_node -dit -p 8880:3000 registry.carsworld.id/ahmad/hello-node:buildlocal sh
+  #script:
+    #- docker run --name ahmad_hello_node -dit -p 8880:3000 registry.carsworld.id/ahmad/hello-node:buildlocal sh
 
 autotest_project:
   stage: autotest
