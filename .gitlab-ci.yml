@@ -3,6 +3,7 @@ stages:
   - upload
   - test
   - deploy
+  - autotest
 
 build_project:
   stage: build
@@ -29,8 +30,7 @@ test_project:
   tags:
     - dockerindependent
   script:
-    - docker run --name test_hello_node -dit registry.carsworld.id/ahmad/hello-node:buildlocal npm test
-    - docker logs test_hello_node
+    - docker run --name test_hello_node -dit registry.carsworld.id/ahmad/hello-node:buildlocal sh
 
 deploy_project:
   stage: deploy
@@ -38,6 +38,16 @@ deploy_project:
     - master
   tags:
     - dockerindependent
-  when: manual
+  #when: manual
   script:
-    - docker run --name ahmad_hello_node -dit -p 8880:3000 registry.carsworld.id/ahmad/hello-node:buildlocal npm start
+    - docker run --name ahmad_hello_node -dit -p 8880:3000 registry.carsworld.id/ahmad/hello-node:buildlocal sh
+
+autotest_project:
+  stage: autotest
+  only:
+    - master
+  tags:
+    - katalon
+  #when: manual
+  script:
+    - cd /home/ahmad/Katalon_Studio_Linux_64-6.2.0 && ./katalon -noSplash  -runMode=console -consoleLog -projectPath="/home/ahmad/Katalon Studio/ArdimasyuWeb/ArdimasyuWeb.prj" -retry=0 -testSuitePath="Test Suites/Signin01" -browserType="Chrome (headless)"
