@@ -47,7 +47,7 @@ autotest_project:
   only:
     - master
   tags:
-    - runnerwindows
+    - windows
   #when: manual
   script:
     - katalon -noSplash  -runMode=console -consoleLog -noExit -projectPath="C:\Users\user\Katalon Studio\IWS_Admin\IWS_Admin.prj" -retry=0 -testSuitePath="Test Suites/Test Suite" -executionProfile="default" -browserType="Firefox"
