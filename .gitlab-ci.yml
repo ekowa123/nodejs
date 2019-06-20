@@ -50,4 +50,6 @@ autotest_project:
     - windows
   #when: manual
   script:
-    - katalon -noSplash  -runMode=console -consoleLog -projectPath="C:\Users\user\Katalon Studio\IWS_Admin\IWS_Admin.prj" -retry=0 -testSuitePath="Test Suites/Test Suite" -executionProfile="default" -browserType="Firefox" -summaryReport -reportFolder="C:\Users\user\Katalon Studio\IWS_Admin\Reports\Test Suite\laporan"
+    - set foldername=%date:~6,4%%date:~0,2%%date:~3,2%_%time:~0,2%24%time:~3,2%%time:~6,2%
+    - mkdir C:\Users\user\Katalon Studio\IWS_Admin\Reports\Test Suite\%foldername%
+    - katalon -noSplash  -runMode=console -consoleLog -projectPath="C:\Users\user\Katalon Studio\IWS_Admin\IWS_Admin.prj" -retry=0 -testSuitePath="Test Suites/Test Suite" -executionProfile="default" -browserType="Firefox" -summaryReport -reportFolder="C:\Users\user\Katalon Studio\IWS_Admin\Reports\Test Suite\%foldername%"
