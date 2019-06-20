@@ -47,7 +47,7 @@ autotest_project:
   only:
     - master
   tags:
-    - katalon
+    - runnerwindows
   #when: manual
   script:
-    - cd /home/ahmad/Katalon_Studio_Linux_64-6.2.0 && ./katalon -noSplash  -runMode=console -consoleLog -projectPath="/home/ahmad/Katalon Studio/ArdimasyuWeb/ArdimasyuWeb.prj" -retry=0 -testSuitePath="Test Suites/Signin01" -browserType="Firefox"
+    - katalon -noSplash  -runMode=console -consoleLog -noExit -projectPath="C:\Users\user\Katalon Studio\IWS_Admin\IWS_Admin.prj" -retry=0 -testSuitePath="Test Suites/Test Suite" -executionProfile="default" -browserType="Firefox"
