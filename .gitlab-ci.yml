@@ -1,6 +1,7 @@
 stages:
   - build
   - upload
+  - remove
   #- test
   - deploy
   - autotest
@@ -22,6 +23,15 @@ upload_project:
     - dockerindependent
   script:
     - docker push registry.carsworld.id/ahmad/hello-node:buildlocal
+
+remove_project:
+  stage: remove
+  only:
+    - master
+  tags:
+    - dockerindependent
+  script:
+    - docker rmi registry.carsworld.id/ahmad/hello-node:buildlocal
 
 #test_project:
   #stage: test
