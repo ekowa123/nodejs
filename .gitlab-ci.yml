@@ -23,7 +23,7 @@ build_project:
     #- docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
     #- cd /home/ahmad/SonarProjects/hello-node && git pull origin master
     #- /home/ahmad/PhpProjects/test01/vendor/bin/phpunit /home/ahmad/PhpProjects/test01/DependTest.php
-    - cd /home/ahmad/SonarProject/hello-node && sonar-scanner -D sonar.login=f5da1de8b5c1f149fc0b4970ac58dbdb6b88522f
+    - cd /home/ahmad/SonarProjects/hello-node && sonar-scanner -D sonar.login=f5da1de8b5c1f149fc0b4970ac58dbdb6b88522f
 
 #upload_project:
   #stage: upload
