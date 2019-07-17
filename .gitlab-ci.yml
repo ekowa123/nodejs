@@ -16,6 +16,7 @@ build_project:
   script:
     #- docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
     - echo 'Testing Started'
+    - mkdir /home/ahmad/SonarProjects/hellonode
     - /home/ahmad/PhpProjects/test01/vendor/bin/phpunit /home/ahmad/PhpProjects/test01/DependTest.php
 
 #upload_project:
