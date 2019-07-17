@@ -1,3 +1,10 @@
+initial_project:
+  before_script:
+    - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then echo 'Existing'; else cp -R /home/ahmad/SonarProject/examples /home/ahmad/SonarProjects/hello-node; fi
+    - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then sed -i '1s/.*/sonar.projectKey=org.sonarqube:ahmad-hello-node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
+    - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then sed -i '2s/.*/sonar.projectName=Ahmad Hello Node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
+    - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then git pull origin master; else git clone https://ahmad:ardiansyah@repo.carsworld.id/ahmad/hello-node.git /home/ahmad/SonarProjects/hello-node/src/app; fi
+
 stages:
   - build
   #- upload
@@ -15,9 +22,9 @@ build_project:
     - sonarqube
   script:
     #- docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
-    - echo 'Testing Started'
-    - if [ -d "/home/ahmad/SonarProjects/hellonode" ]; then touch /home/ahmad/SonarProjects/hellonode/tes.txt; else mkdir /home/ahmad/SonarProjects/hellonode; fi 
-    - /home/ahmad/PhpProjects/test01/vendor/bin/phpunit /home/ahmad/PhpProjects/test01/DependTest.php
+    #- cd /home/ahmad/SonarProjects/hello-node && git pull origin master
+    #- /home/ahmad/PhpProjects/test01/vendor/bin/phpunit /home/ahmad/PhpProjects/test01/DependTest.php
+    - cd /home/ahmad/SonarProject/hello-node && sonar-scanner -D sonar.login=f5da1de8b5c1f149fc0b4970ac58dbdb6b88522f
 
 #upload_project:
   #stage: upload
