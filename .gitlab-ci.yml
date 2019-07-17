@@ -1,9 +1,8 @@
-default:
-  before_script:
-    - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then echo 'Existing'; else cp -R /home/ahmad/SonarProject/examples /home/ahmad/SonarProjects/hello-node; fi
-    - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then sed -i '1s/.*/sonar.projectKey=org.sonarqube:ahmad-hello-node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
-    - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then sed -i '2s/.*/sonar.projectName=Ahmad Hello Node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
-    - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then git pull origin master; else git clone https://ahmad:ardiansyah@repo.carsworld.id/ahmad/hello-node.git /home/ahmad/SonarProjects/hello-node/src/app; fi
+before_script:
+  - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then echo 'Existing'; else cp -R /home/ahmad/SonarProject/examples /home/ahmad/SonarProjects/hello-node; fi
+  - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then sed -i '1s/.*/sonar.projectKey=org.sonarqube:ahmad-hello-node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
+  - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then sed -i '2s/.*/sonar.projectName=Ahmad Hello Node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
+  - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then git pull origin master; else git clone https://ahmad:ardiansyah@repo.carsworld.id/ahmad/hello-node.git /home/ahmad/SonarProjects/hello-node/src/app; fi
 
 stages:
   - build
