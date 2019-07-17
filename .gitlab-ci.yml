@@ -1,37 +1,39 @@
 stages:
   - build
-  - upload
-  - remove
+  #- upload
+  #- remove
   #- test
-  - deploy
-  - autotest
+  #- deploy
+  #- autotest
 
 build_project:
   stage: build
   only:
     - master
   tags:
-    - dockerindependent
+    #- dockerindependent
+    - sonarqube
   script:
-    - docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
+    #- docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
+    - echo 'berjalan'
 
-upload_project:
-  stage: upload
-  only:
-    - master
-  tags:
-    - dockerindependent
-  script:
-    - docker push registry.carsworld.id/ahmad/hello-node:buildlocal
+#upload_project:
+  #stage: upload
+  #only:
+    #- master
+  #tags:
+    #- dockerindependent
+  #script:
+    #- docker push registry.carsworld.id/ahmad/hello-node:buildlocal
 
-remove_project:
-  stage: remove
-  only:
-    - master
-  tags:
-    - dockerindependent
-  script:
-    - docker rmi registry.carsworld.id/ahmad/hello-node:buildlocal
+#remove_project:
+  #stage: remove
+  #only:
+    #- master
+  #tags:
+    #- dockerindependent
+  #script:
+    #- docker rmi registry.carsworld.id/ahmad/hello-node:buildlocal
 
 #test_project:
   #stage: test
@@ -42,24 +44,24 @@ remove_project:
   #script:
     #- docker run --name test_hello_node -dit registry.carsworld.id/ahmad/hello-node:buildlocal sh
 
-deploy_project:
-  stage: deploy
-  only:
-    - master
-  tags:
-    - dockerindependent
+#deploy_project:
+  #stage: deploy
+  #only:
+    #- master
+  #tags:
+    #- dockerindependent
   #when: manual
-  script:
-    - docker run --name ahmad_hello_node -dit -p 8881:3000 registry.carsworld.id/ahmad/hello-node:buildlocal sh
+  #script:
+    #- docker run --name ahmad_hello_node -dit -p 8881:3000 registry.carsworld.id/ahmad/hello-node:buildlocal sh
 
-autotest_project:
-  stage: autotest
-  only:
-    - master
-  tags:
-    - windows
+#autotest_project:
+  #stage: autotest
+  #only:
+    #- master
+  #tags:
+    #- windows
   #when: manual
-  script:
-    - set foldername=%date:~6,4%%date:~0,2%%date:~3,2%_%time:~0,2%24%time:~3,2%%time:~6,2%
-    - mkdir C:\Users\user\Katalon Studio\IWS_Admin\Reports\Test Suite\%foldername%
-    - katalon -noSplash  -runMode=console -consoleLog -projectPath="C:\Users\user\Katalon Studio\IWS_Admin\IWS_Admin.prj" -retry=0 -testSuitePath="Test Suites/Test Suite" -executionProfile="default" -browserType="Firefox" -summaryReport -reportFolder="C:\Users\user\Katalon Studio\IWS_Admin\Reports\Test Suite\%foldername%"
+  #script:
+    #- set foldername=%date:~6,4%%date:~0,2%%date:~3,2%_%time:~0,2%24%time:~3,2%%time:~6,2%
+    #- mkdir C:\Users\user\Katalon Studio\IWS_Admin\Reports\Test Suite\%foldername%
+    #- katalon -noSplash  -runMode=console -consoleLog -projectPath="C:\Users\user\Katalon Studio\IWS_Admin\IWS_Admin.prj" -retry=0 -testSuitePath="Test Suites/Test Suite" -executionProfile="default" -browserType="Firefox" -summaryReport -reportFolder="C:\Users\user\Katalon Studio\IWS_Admin\Reports\Test Suite\%foldername%"
