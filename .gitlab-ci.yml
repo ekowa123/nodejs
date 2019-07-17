@@ -15,6 +15,7 @@ build_project:
     - sonarqube
   script:
     #- docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
+    - echo 'Testing Started'
     - /home/ahmad/PhpProjects/test01/vendor/bin/phpunit /home/ahmad/PhpProjects/test01/DependTest.php
 
 #upload_project:
