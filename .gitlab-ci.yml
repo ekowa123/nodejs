@@ -2,7 +2,7 @@ before_script:
   - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then echo 'Existing'; else cp -R /home/ahmad/SonarProjects/examples /home/ahmad/SonarProjects/hello-node; fi
   - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then sed -i '1s/.*/sonar.projectKey=org.sonarqube:ahmad-hello-node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
   - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then sed -i '2s/.*/sonar.projectName=Ahmad Hello Node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
-  - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then git pull origin master; else cd /home/ahmad/SonarProjects/hello-node/src && git clone https://ahmad:ardiansyah@repo.carsworld.id/ahmad/hello-node.git app; fi
+  - if [ -d "/home/ahmad/SonarProjects/hello-node/src/app" ]; then git pull origin master; else cd /home/ahmad/SonarProjects/hello-node/src && git clone https://ahmad:ardiansyah@repo.carsworld.id/ahmad/hello-node.git app; fi
 
 stages:
   - build
