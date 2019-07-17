@@ -22,4 +22,9 @@ router.get('/ansyah', function(req, res, next) {
   res.json({status: 200, message: 'Welcome Ansyah.'})
 });
 
+router.get('/bangke', function(req, res, next) {
+  //res.render('index', { title: 'Ahmad Ardiansyah' });
+  res.json({status: 200, message: 'Welcome bangke.'})
+});
+
 module.exports = router;
