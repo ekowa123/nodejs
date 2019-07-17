@@ -15,7 +15,7 @@ build_project:
     - sonarqube
   script:
     #- docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
-    - echo 'berjalan'
+    - git --version
 
 #upload_project:
   #stage: upload
