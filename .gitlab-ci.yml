@@ -6,23 +6,28 @@ stages:
   - deploy
   - autotest
 
-test_code:
+init_code:
   stage: testcode
   only:
     - master
   tags:
     - sonarqube
-  init_code:
-    script:
-      - echo $PROJECT_KEY
-      #- if [ -d "/home/ahmad/SonarProjects/$PROJECT_KEY" ]; then echo 'Existing'; else cp -R /home/ahmad/SonarProject/examples /home/ahmad/SonarProjects/hello-node; fi
-      #- if [ -d "/home/ahmad/SonarProjects/$PROJECT_KEY" ]; then sed -i '1s/.*/sonar.projectKey=org.sonarqube:ahmad-hello-node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
-      #- if [ -d "/home/ahmad/SonarProjects/$PROJECT_KEY" ]; then sed -i '2s/.*/sonar.projectName=Ahmad Hello Node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
-      #- if [ -d "/home/ahmad/SonarProjects/$PROJECT_KEY" ]; then git pull origin master; else git clone https://ahmad:ardiansyah@repo.carsworld.id/ahmad/hello-node.git /home/ahmad/SonarProjects/hello-node/src/app; fi
-  run_code:
-    script:
-      #- cd /home/ahmad/SonarProject/hello-node && sonar-scanner -D sonar.login=f5da1de8b5c1f149fc0b4970ac58dbdb6b88522f
-      - echo $PROJECT_NAME
+  script:
+    - echo $PROJECT_KEY
+    #- if [ -d "/home/ahmad/SonarProjects/$PROJECT_KEY" ]; then echo 'Existing'; else cp -R /home/ahmad/SonarProject/examples /home/ahmad/SonarProjects/hello-node; fi
+    #- if [ -d "/home/ahmad/SonarProjects/$PROJECT_KEY" ]; then sed -i '1s/.*/sonar.projectKey=org.sonarqube:ahmad-hello-node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
+    #- if [ -d "/home/ahmad/SonarProjects/$PROJECT_KEY" ]; then sed -i '2s/.*/sonar.projectName=Ahmad Hello Node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
+    #- if [ -d "/home/ahmad/SonarProjects/$PROJECT_KEY" ]; then git pull origin master; else git clone https://ahmad:ardiansyah@repo.carsworld.id/ahmad/hello-node.git /home/ahmad/SonarProjects/hello-node/src/app; fi
+
+pull_code:
+  stage: testcode
+  only:
+    - master
+  tags:
+    - sonarqube
+  script:
+    #- cd /home/ahmad/SonarProject/hello-node && sonar-scanner -D sonar.login=f5da1de8b5c1f149fc0b4970ac58dbdb6b88522f
+    - echo $PROJECT_NAME
 
 #upload_project:
   #stage: upload
