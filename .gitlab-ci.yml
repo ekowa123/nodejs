@@ -19,6 +19,15 @@ test_code:
     - if [ -d "/sonar/hello-node/src/app" ]; then git pull origin master; else git clone https://ahmad:ardiansyah@repo.carsworld.id/ahmad/hello-node.git /sonar/hello-node/src/app; fi
     - cd /sonar/hello-node && sonar-scanner -D sonar.login=f5da1de8b5c1f149fc0b4970ac58dbdb6b88522f
 
+build_project:
+  stage: build
+  only:
+    - master
+  tags:
+    - dockerindependent
+  script:
+    - docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
+
 #upload_project:
   #stage: upload
   #only:
