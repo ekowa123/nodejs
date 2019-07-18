@@ -16,7 +16,7 @@ test_code:
     - if [ -d "/sonar/hello-node" ]; then echo 'Existing'; else cp -R /sonar/examples /sonar/hello-node; fi
     - if [ -d "/sonar/hello-node" ]; then sed -i '1s/.*/sonar.projectKey=org.sonarqube:hello-node/' /sonar/hello-node/sonar-project.properties; fi
     - if [ -d "/sonar/hello-node" ]; then sed -i '2s/.*/sonar.projectName=Hello Node Apps/' /sonar/hello-node/sonar-project.properties; fi
-    - if [ -d "/sonar/hello-node/src/app" ]; then git pull origin master; else git clone https://ahmad:ardiansyah@repo.carsworld.id/ahmad/hello-node.git /sonar/hello-node/src/app; fi
+    - if [ -d "/sonar/hello-node/src/app" ]; then cd /sonar/hello-node/src/app && git pull origin master; else git clone https://ahmad:ardiansyah@repo.carsworld.id/ahmad/hello-node.git /sonar/hello-node/src/app; fi
     - cd /sonar/hello-node && sonar-scanner -D sonar.login=f5da1de8b5c1f149fc0b4970ac58dbdb6b88522f
 
 build_project:
