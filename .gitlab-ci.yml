@@ -28,35 +28,23 @@ build_project:
   script:
     - docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
 
-#upload_project:
-  #stage: upload
-  #only:
-    #- master
-  #tags:
-    #- dockerindependent
-  #script:
-    #- docker push registry.carsworld.id/ahmad/hello-node:buildlocal
-    #- docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
-      #- cd /sonar/hello-node && git pull origin master
-      #- /home/ahmad/PhpProjects/test01/vendor/bin/phpunit /home/ahmad/PhpProjects/test01/DependTest.php
+upload_project:
+  stage: upload
+  only:
+    - master
+  tags:
+    - dockerindependent
+  script:
+    - docker push registry.carsworld.id/ahmad/hello-node:buildlocal
 
-#remove_project:
-  #stage: remove
-  #only:
-    #- master
-  #tags:
-    #- dockerindependent
-  #script:
-    #- docker rmi registry.carsworld.id/ahmad/hello-node:buildlocal
-
-#test_project:
-  #stage: test
-  #only:
-    #- master
-  #tags:
-    #- dockerindependent
-  #script:
-    #- docker run --name test_hello_node -dit registry.carsworld.id/ahmad/hello-node:buildlocal sh
+remove_project:
+  stage: remove
+  only:
+    - master
+  tags:
+    - dockerindependent
+  script:
+    - docker rmi registry.carsworld.id/ahmad/hello-node:buildlocal
 
 #deploy_project:
   #stage: deploy
@@ -66,7 +54,7 @@ build_project:
     #- dockerindependent
   #when: manual
   #script:
-    #- docker run --name ahmad_hello_node -dit -p 8881:3000 registry.carsworld.id/ahmad/hello-node:buildlocal sh
+    #- docker service update --force --image registry.carsworld.id/carsworld/carfix/api-new-journey:buildlocal api_carfix_booking_apicarfix
 
 #autotest_project:
   #stage: autotest
