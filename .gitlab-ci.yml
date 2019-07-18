@@ -1,29 +1,28 @@
-before_script:
-  - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then echo 'Existing'; else cp -R /home/ahmad/SonarProjects/examples /home/ahmad/SonarProjects/hello-node; fi
-  - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then sed -i '1s/.*/sonar.projectKey=org.sonarqube:ahmad-hello-node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
-  - if [ -d "/home/ahmad/SonarProjects/hello-node" ]; then sed -i '2s/.*/sonar.projectName=Ahmad Hello Node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
-  - if [ -d "/home/ahmad/SonarProjects/hello-node/src/app" ]; then cd /home/ahmad/SonarProjects/hello-node/src/app && git pull origin master; else cd /home/ahmad/SonarProjects/hello-node/src && git clone https://ahmad:ardiansyah@repo.carsworld.id/carsworld/carfix/api-new-journey.git app; fi
-
 stages:
+  - testcode
   - build
-  #- upload
-  #- remove
-  #- test
-  #- deploy
-  #- autotest
+  - upload
+  - remove
+  - deploy
+  - autotest
 
-build_project:
-  stage: build
+test_code:
+  stage: testcode
   only:
     - master
   tags:
-    #- dockerindependent
     - sonarqube
-  script:
-    #- docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
-    #- cd /home/ahmad/SonarProjects/hello-node && git pull origin master
-    #- /home/ahmad/PhpProjects/test01/vendor/bin/phpunit /home/ahmad/PhpProjects/test01/DependTest.php
-    - cd /home/ahmad/SonarProjects/hello-node && sonar-scanner -D sonar.login=f5da1de8b5c1f149fc0b4970ac58dbdb6b88522f
+  init_code:
+    script:
+      - echo $PROJECT_KEY
+      #- if [ -d "/home/ahmad/SonarProjects/$PROJECT_KEY" ]; then echo 'Existing'; else cp -R /home/ahmad/SonarProject/examples /home/ahmad/SonarProjects/hello-node; fi
+      #- if [ -d "/home/ahmad/SonarProjects/$PROJECT_KEY" ]; then sed -i '1s/.*/sonar.projectKey=org.sonarqube:ahmad-hello-node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
+      #- if [ -d "/home/ahmad/SonarProjects/$PROJECT_KEY" ]; then sed -i '2s/.*/sonar.projectName=Ahmad Hello Node/' /home/ahmad/SonarProjects/hello-node/sonar-project.properties; fi
+      #- if [ -d "/home/ahmad/SonarProjects/$PROJECT_KEY" ]; then git pull origin master; else git clone https://ahmad:ardiansyah@repo.carsworld.id/ahmad/hello-node.git /home/ahmad/SonarProjects/hello-node/src/app; fi
+  run_code:
+    script:
+      #- cd /home/ahmad/SonarProject/hello-node && sonar-scanner -D sonar.login=f5da1de8b5c1f149fc0b4970ac58dbdb6b88522f
+      - echo $PROJECT_NAME
 
 #upload_project:
   #stage: upload
@@ -33,6 +32,9 @@ build_project:
     #- dockerindependent
   #script:
     #- docker push registry.carsworld.id/ahmad/hello-node:buildlocal
+    #- docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
+      #- cd /home/ahmad/SonarProjects/hello-node && git pull origin master
+      #- /home/ahmad/PhpProjects/test01/vendor/bin/phpunit /home/ahmad/PhpProjects/test01/DependTest.php
 
 #remove_project:
   #stage: remove
