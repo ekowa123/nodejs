@@ -1,15 +1,29 @@
 stages:
+  - testcode
   - build
   - upload
-  - test
   - deploy
+  - autotest
+
+test_code:
+  stage: testcode
+  only:
+    - master
+  tags:
+    - sonartester
+  script:
+    - if [ -d "/sonar/hello-node" ]; then echo 'Existing'; else cp -R /sonar/examples /sonar/hello-node; fi
+    - if [ -d "/sonar/hello-node" ]; then sed -i '1s/.*/sonar.projectKey=org.sonarqube:hello-node/' /sonar/hello-node/sonar-project.properties; fi
+    - if [ -d "/sonar/hello-node" ]; then sed -i '2s/.*/sonar.projectName=Hello Node Apps/' /sonar/hello-node/sonar-project.properties; fi
+    - if [ -d "/sonar/hello-node/src/app" ]; then cd /sonar/hello-node/src/app && git pull origin master; else git clone https://'infra':'bintraco1!'@repo.carsworld.id/ahmad/hello-node.git /sonar/hello-node/src/app; fi
+    - cd /sonar/hello-node && sonar-scanner -D sonar.login=f5da1de8b5c1f149fc0b4970ac58dbdb6b88522f
 
 build_project:
   stage: build
   only:
     - master
   tags:
-    - dockerindependent
+    - dockerbuilder
   script:
     - docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
 
@@ -18,26 +32,29 @@ upload_project:
   only:
     - master
   tags:
-    - dockerindependent
+    - dockerbuilder
   script:
     - docker push registry.carsworld.id/ahmad/hello-node:buildlocal
-
-test_project:
-  stage: test
-  only:
-    - master
-  tags:
-    - dockerindependent
-  script:
-    - docker run --name test_hello_node -dit registry.carsworld.id/ahmad/hello-node:buildlocal npm test
-    - docker logs test_hello_node
+    - docker rmi registry.carsworld.id/ahmad/hello-node:buildlocal
 
 deploy_project:
   stage: deploy
   only:
     - master
   tags:
-    - dockerindependent
+    - dockerbuilder
   when: manual
   script:
-    - docker run --name ahmad_hello_node -dit -p 8880:3000 registry.carsworld.id/ahmad/hello-node:buildlocal npm start
+    - docker run --name ahmad_hello_node -dit -p 9022:3000 registry.carsworld.id/ahmad/hello-node:buildlocal
+
+#autotest_project:
+  #stage: autotest
+  #only:
+    #- master
+  #tags:
+    #- windows
+  #when: manual
+  #script:
+    #- set foldername=%date:~6,4%%date:~0,2%%date:~3,2%_%time:~0,2%24%time:~3,2%%time:~6,2%
+    #- mkdir C:\Users\user\Katalon Studio\IWS_Admin\Reports\Test Suite\%foldername%
+    #- katalon -noSplash  -runMode=console -consoleLog -projectPath="C:\Users\user\Katalon Studio\IWS_Admin\IWS_Admin.prj" -retry=0 -testSuitePath="Test Suites/Test Suite" -executionProfile="default" -browserType="Firefox" -summaryReport -reportFolder="C:\Users\user\Katalon Studio\IWS_Admin\Reports\Test Suite\%foldername%"

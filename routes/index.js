@@ -25,4 +25,16 @@ router.get('/me', auth.authenticate, function(req, res, next) {
 	res.json({ status: 200, message: 'Ok, you are allowed'})
 });
 
+router.get('/ahmad', function(req, res, next) {
+  res.json({status: 200, message: 'Welcome Ahmad.'})
+});
+
+router.get('/ardi', function(req, res, next) {
+  res.json({status: 200, message: 'Welcome Ardi.'})
+});
+
+router.get('/ansyah', function(req, res, next) {
+  res.json({status: 200, message: 'Welcome Ansyah.'})
+});
+
 module.exports = router;
