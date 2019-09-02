@@ -7,7 +7,7 @@ var SECRET_KEY = '4hm4d_4rd14nsy4h_N0d3';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.json({ status: 200, message: 'Welcome to Carsworld Digital Indonesia.' });
+  res.render('index', { status: 200, message: 'Welcome to Carsworld Digital Indonesia.', title: 'Hello Node.js' });
 });
 
 router.get('/auth/:user/:pass', function(req, res, next) {
@@ -17,11 +17,17 @@ router.get('/auth/:user/:pass', function(req, res, next) {
 	if(!userParams) return res.json({ status: 500, message: 'Params user must be filled.'});
 	if(!passParams) return res.json({ status: 500, message: 'Params pass must be filled.'});
 
-	var token = jwt.sign({ user: userParams, pass: passParams }, SECRET_KEY, { expiresIn: '1h'});
+	var token = jwt.sign(
+		{ user: userParams, pass: passParams }, 
+		SECRET_KEY, 
+		{ expiresIn: 60, algorithm: 'HS384' }
+	);
+
 	res.json({ status: 200, message: 'Ok', data: token });
 });
 
 router.get('/me', auth.authenticate, function(req, res, next) {
+	console.log(req.app.token);
 	res.json({ status: 200, message: 'Ok, you are allowed'})
 });
 
