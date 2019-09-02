@@ -1,3 +1,4 @@
+// ini untuk jsonwebtokennya
 var jwt = require('jsonwebtoken');
 
 var SECRET_KEY = '4hm4d_4rd14nsy4h_N0d3';
