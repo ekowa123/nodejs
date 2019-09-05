@@ -43,7 +43,6 @@ deploy_project:
     - master
   tags:
     - dockerbuilder
-  when: manual
   script:
     - if [ ! "$(docker ps -q -f name=ahmad_hello_node)" ]; then docker run --name ahmad_hello_node -dit -p 9022:3000 registry.carsworld.id/ahmad/hello-node:buildlocal; else docker rm -f ahmad_hello_node && docker run --name ahmad_hello_node -dit -p 9022:3000 registry.carsworld.id/ahmad/hello-node:buildlocal; fi
 
