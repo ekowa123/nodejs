@@ -20,7 +20,7 @@ router.get('/auth/:user/:pass', function(req, res, next) {
 	var token = jwt.sign(
 		{ user: userParams, pass: passParams }, 
 		SECRET_KEY, 
-		{ expiresIn: 60, algorithm: 'HS384' }
+		{ expiresIn: 120, algorithm: 'HS384' }
 	);
 
 	res.json({ status: 200, message: 'Ok', data: token });
