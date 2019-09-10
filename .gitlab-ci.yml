@@ -25,6 +25,7 @@ build_project:
   tags:
     - dockerbuilder
   script:
+    - if [ ! "$(docker ps -q -f name=ahmad_hello_node)" ]; then echo "Container empty"; else docker rm -f ahmad_hello_node && docker rmi -f registry.carsworld.id/ahmad/hello-node:buildlocal; fi
     - docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
 
 upload_project:
@@ -43,9 +44,8 @@ deploy_project:
     - master
   tags:
     - dockerbuilder
-  when: manual
   script:
-    - docker run --name ahmad_hello_node -dit -p 9022:3000 registry.carsworld.id/ahmad/hello-node:buildlocal
+    - docker run --name ahmad_hello_node -dit -p 9022:3000 registry.carsworld.id/ahmad/hello-node:buildlocal;
 
 #autotest_project:
   #stage: autotest
