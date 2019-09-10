@@ -3,6 +3,10 @@ var jwt = require('jsonwebtoken');
 var auth = require('../configs/auth');
 var router = express.Router();
 
+var TOKEN_BOT = "845430643:AAGDRv1fRcQaEhNKLHLfPY_Ow2qPaSflbjE";
+var TelegramBotClient = require('telegram-bot-client');
+var client = new TelegramBotClient(TOKEN_BOT);
+
 var SECRET_KEY = '4hm4d_4rd14nsy4h_N0d3';
 
 /* GET home page. */
@@ -29,6 +33,16 @@ router.get('/auth/:user/:pass', function(req, res, next) {
 router.get('/me', auth.authenticate, function(req, res, next) {
 	console.log(req.app.token);
 	res.json({ status: 200, message: 'Ok, you are allowed'})
+});
+
+router.get('/api', function(req, res, next) {
+	if(req.query.stock){
+		client.sendMessage(324622115, 'Stok barang sekarang '+req.query.stock);
+  	res.json({status: 200, message: 'Stok barang sekarang '+req.query.stock})
+	} else {
+		client.sendMessage(324622115, 'Stok barang habis');
+  	res.json({status: 200, message: 'Stok barang habis'})
+	}
 });
 
 router.get('/ahmad', function(req, res, next) {
