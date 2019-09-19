@@ -9,6 +9,8 @@ var client = new TelegramBotClient(TOKEN_BOT);
 
 var SECRET_KEY = '4hm4d_4rd14nsy4h_N0d3';
 
+tester = 'Hai';
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { status: 200, message: 'Welcome to Carsworld Digital Indonesia.', title: 'Hello Node.js' });
