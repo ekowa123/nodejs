@@ -9,7 +9,8 @@ var client = new TelegramBotClient(TOKEN_BOT);
 
 var SECRET_KEY = '4hm4d_4rd14nsy4h_N0d3';
 
-var tester = 'Hai';
+tester = 'Hai';
+tester2 = 'ahmad';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
