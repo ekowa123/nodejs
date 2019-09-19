@@ -11,6 +11,6 @@ exports.authenticate = (req, res, next) => {
 		if(err) return res.json({ status: 500, message: 'Failed to authenticate token'});
 
 		req.app.token = decoded;
-		next();
+		return next();
 	});
 }
