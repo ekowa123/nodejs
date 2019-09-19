@@ -7,13 +7,11 @@ let chaiHttp = require('chai-http');
 let server = require('../app.js');
 let should = chai.should();
 
-
 chai.use(chaiHttp);
 
 //Our parent block
 describe('Hello Node.js', () => {
-	
-	/*
+  /*
   * Test the /GET index
   */
   describe('/GET index', () => {
@@ -39,5 +37,4 @@ describe('Hello Node.js', () => {
           });
       });
   });
-
 });
