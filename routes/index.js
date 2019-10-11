@@ -14,7 +14,7 @@ var tester2 = 'ahmad';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { status: 200, message: 'Welcome to Carsworld Digital Indonesia.', title: 'Hello Node.js' });
+  res.render('index', { status: 200, message: 'Welcome to Carsworld Digital Indonesia.', title: 'Hello Ahmad Ardiansyah' });
 });
 
 router.get('/auth/:user/:pass', function(req, res, next) {
