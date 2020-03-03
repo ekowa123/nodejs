@@ -9,7 +9,7 @@ runner_test:
   only:
     - master
   tags:
-    - awsdocker
+    - awsshell
   script:
     - docker version
 
