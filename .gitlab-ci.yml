@@ -15,6 +15,7 @@ runner_test:
     - pwd
     - docker version
     - terraform -v
+    - salt --version
 
 #build_project:
 #  stage: build
