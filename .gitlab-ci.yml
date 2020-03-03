@@ -11,6 +11,8 @@ runner_test:
   tags:
     - awsshell
   script:
+    - whoami
+    - pwd
     - docker version
 
 #build_project:
