@@ -1,4 +1,5 @@
 var express = require('express');
+var OS = require('os');
 var jwt = require('jsonwebtoken');
 var auth = require('../configs/auth');
 var router = express.Router();
@@ -14,7 +15,7 @@ var tester2 = 'ahmad';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { status: 200, message: 'Welcome to Carsworld Digital Indonesia.', title: 'Hello Ahmad Ardiansyah' });
+  res.render('index', { status: 200, message: 'Welcome to Carsworld Digital Indonesia.', title: 'Hello Ahmad Ardiansyah', hot: OS.hostname()  });
 });
 
 router.get('/auth/:user/:pass', function(req, res, next) {
