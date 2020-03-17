@@ -14,4 +14,8 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/debug-sentry', (req, res) => {
+  throw new Error('My first Sentry error!');
+});
+
 module.exports = router;
