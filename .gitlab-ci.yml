@@ -9,9 +9,10 @@ build_app:
   tags:
     - stgasman
   script:
-    - if [ ! "$(docker ps -q -f name=ahmad_hello_node)" ]; then echo "Container empty"; else docker rm -f ahmad_hello_node && docker rmi -f registry.carsworld.id/ahmad/hello-node:buildlocal; fi
-    - docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
-    - docker push registry.carsworld.id/ahmad/hello-node:buildlocal
+    - echo "Build..."
+    #- if [ ! "$(docker ps -q -f name=ahmad_hello_node)" ]; then echo "Container empty"; else docker rm -f ahmad_hello_node && docker rmi -f registry.carsworld.id/ahmad/hello-node:buildlocal; fi
+    #- docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
+    #- docker push registry.carsworld.id/ahmad/hello-node:buildlocal
 
 deploy_app:
   stage: deploy
@@ -20,4 +21,10 @@ deploy_app:
   tags:
     - stgasman
   script:
-    - docker run --name ahmad_hello_node -dit -p 9910:3000 registry.carsworld.id/ahmad/hello-node:buildlocal
+    - if [ ! "$(docker stack ls | grep ahmad-stack)" ]; then 
+        echo "Stack Exists"; 
+      else
+        echo "Stack Not Exists";
+      fi
+    #- docker run --name ahmad_hello_node -dit -p 9910:3000 registry.carsworld.id/ahmad/hello-node:buildlocal
+    - echo "Done..."
