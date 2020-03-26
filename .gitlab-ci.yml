@@ -11,6 +11,7 @@ build_app:
   script:
     - if [ ! "$(docker ps -q -f name=ahmad_hello_node)" ]; then echo "Container empty"; else docker rm -f ahmad_hello_node && docker rmi -f registry.carsworld.id/ahmad/hello-node:buildlocal; fi
     - docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
+    - docker push registry.carsworld.id/ahmad/hello-node:buildlocal
 
 deploy_app:
   stage: deploy
