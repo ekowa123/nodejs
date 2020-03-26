@@ -10,6 +10,7 @@ COPY . .
 
 # install dependencies
 RUN npm install
+RUN npm i @sentry/node
 
 # open port
 EXPOSE 3000
