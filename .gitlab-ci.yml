@@ -1,59 +1,22 @@
 stages:
   - build
-  - upload
   - deploy
-  - autotest
-  
-#runner_test:
-#  stage: build
-#  only:
-#    - master
-#  tags:
-#    - awsshell
-#  script:
-#    - whoami
-#    - pwd
-#    - docker version
-#    - terraform -v
-#    - salt --version
 
-build_project:
+build_app:
   stage: build
   only:
     - master
   tags:
-    - dockerbuilder
+    - stgasman
   script:
     - if [ ! "$(docker ps -q -f name=ahmad_hello_node)" ]; then echo "Container empty"; else docker rm -f ahmad_hello_node && docker rmi -f registry.carsworld.id/ahmad/hello-node:buildlocal; fi
     - docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
 
-upload_project:
-  stage: upload
-  only:
-    - master
-  tags:
-    - dockerbuilder
-  script:
-    - docker push registry.carsworld.id/ahmad/hello-node:buildlocal
-    - docker rmi registry.carsworld.id/ahmad/hello-node:buildlocal
-
-deploy_project:
+deploy_app:
   stage: deploy
   only:
     - master
   tags:
-    - dockerbuilder
+    - stgasman
   script:
-    - docker run --name ahmad_hello_node -dit -p 9022:3000 registry.carsworld.id/ahmad/hello-node:buildlocal
-
-#autotest_project:
-  #stage: autotest
-  #only:
-    #- master
-  #tags:
-    #- windows
-  #when: manual
-  #script:
-    #- set foldername=%date:~6,4%%date:~0,2%%date:~3,2%_%time:~0,2%24%time:~3,2%%time:~6,2%
-    #- mkdir C:\Users\user\Katalon Studio\IWS_Admin\Reports\Test Suite\%foldername%
-    #- katalon -noSplash  -runMode=console -consoleLog -projectPath="C:\Users\user\Katalon Studio\IWS_Admin\IWS_Admin.prj" -retry=0 -testSuitePath="Test Suites/Test Suite" -executionProfile="default" -browserType="Firefox" -summaryReport -reportFolder="C:\Users\user\Katalon Studio\IWS_Admin\Reports\Test Suite\%foldername%"
+    - docker run --name ahmad_hello_node -dit -p 9910:3000 registry.carsworld.id/ahmad/hello-node:buildlocal
