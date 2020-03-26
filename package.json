@@ -18,6 +18,6 @@
     "morgan": "~1.9.0",
     "pug": "2.0.0-beta11",
     "telegram-bot-client": "^2.1.1",
-    "@sentry/node": "latest"
+    "@sentry/node": "5.15.0"
   }
 }
