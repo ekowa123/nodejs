@@ -23,9 +23,9 @@ deploy_app:
   script:
     - if [ "$(docker stack ls | grep ahmad-stack)" ]; then 
         echo "Stack Exists"; 
-        docker service update --force --image registry.carsworld.id/ahmad/hello-node:buildlocal ahmad-stack_microservis
+        docker service update --force --image registry.carsworld.id/ahmad/hello-node:buildlocal ahmad-stack_microservis;
       else
         echo "Stack Not Exists";
-        docker stack deploy --with-registry-auth -c docker-compose.yml ahmad-stack
+        docker stack deploy --with-registry-auth -c docker-compose.yml ahmad-stack;
       fi
     - echo "Done..."
