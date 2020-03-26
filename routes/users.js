@@ -15,14 +15,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/test', function(req, res, next) {
-  res.json({
+  let respon = {
   	status: 200,
   	message: "Congratulation, you fetch an API.",
   	result : [
   		{name: "Welcome"},
   		{name: "Testing"}
   	]
-  });
+  };
+  
+  res.json(respon1);
 });
 
 router.get('/debug-sentry', (req, res) => {
