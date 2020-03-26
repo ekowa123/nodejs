@@ -1,0 +1,25 @@
+version: "3"
+services:
+  microservis:
+    image: registry.carsworld.id/ahmad/hello-node:buildlocal
+    ports:
+      - "9910:3000"
+    deploy:
+      labels:
+        - "swarm.autoscaler=true"
+        - "swarm.autoscaler.minimum=2"
+        - "swarm.autoscaler.maximum=6"
+      replicas: 2
+      resources:
+        limits:
+          cpus: "1"
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker
+    networks:
+      - microservis
+networks:
+  microservis:
