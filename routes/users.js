@@ -14,6 +14,17 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/test', function(req, res, next) {
+  res.json({
+  	status: 200,
+  	message: "Congratulation, you fetch an API.",
+  	result : [
+  		{name: "Welcome"},
+  		{name: "Testing"}
+  	]
+  });
+});
+
 router.get('/debug-sentry', (req, res) => {
   throw new Error('My first Sentry error!');
 });
