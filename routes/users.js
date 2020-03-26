@@ -24,7 +24,7 @@ router.get('/test', function(req, res, next) {
   	]
   };
   
-  res.json(respon1);
+  res.json(respon);
 });
 
 router.get('/debug-sentry', (req, res) => {
