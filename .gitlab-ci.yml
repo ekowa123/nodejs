@@ -10,13 +10,15 @@ build_app:
     - dockerbuilder
   script:
     - echo "Build..."
-    - if [ ! "$(docker ps -q -f name=ahmad_hello_node)" ]; then 
-        echo "Container empty"; 
+    - if [ "$(docker images -q registry.carsworld.id/ahmad/hello-node:buildlocal)" ]; then 
+        echo "Image Exists"; 
+        docker rmi -f registry.carsworld.id/ahmad/hello-node:buildlocal; 
       else 
-        docker rm -f ahmad_hello_node && docker rmi -f registry.carsworld.id/ahmad/hello-node:buildlocal; 
+        echo "Image Not Exists";
       fi
     - docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
     - docker push registry.carsworld.id/ahmad/hello-node:buildlocal
+    - echo "Done..."
 
 deploy_app:
   stage: deploy
@@ -25,6 +27,7 @@ deploy_app:
   tags:
     - stgasman
   script:
+    - echo "Deploy..."
     - if [ "$(docker stack ls | grep ahmad-stack)" ]; then 
         echo "Stack Exists"; 
         docker service update --force --image registry.carsworld.id/ahmad/hello-node:buildlocal ahmad-stack_microservis;
