@@ -10,14 +10,9 @@ build_app:
     - dockerbuilder
   script:
     - echo "Build..."
-    - if [ "$(docker images -q registry.carsworld.id/ahmad/hello-node:buildlocal)" ]; then 
-        echo "Image Exists"; 
-        docker rmi -f registry.carsworld.id/ahmad/hello-node:buildlocal; 
-      else 
-        echo "Image Not Exists";
-      fi
     - docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
     - docker push registry.carsworld.id/ahmad/hello-node:buildlocal
+    - docker rmi -f registry.carsworld.id/ahmad/hello-node:buildlocal
     - echo "Done..."
 
 deploy_app:
