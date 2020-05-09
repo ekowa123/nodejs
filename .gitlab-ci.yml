@@ -7,12 +7,12 @@ build_app:
   only:
     - master
   tags:
-    - dockerbuilder
+    - builder01
   script:
     - echo "Build..."
-    - docker build -t registry.carsworld.id/ahmad/hello-node:buildlocal .
-    - docker push registry.carsworld.id/ahmad/hello-node:buildlocal
-    - docker rmi -f registry.carsworld.id/ahmad/hello-node:buildlocal
+    - docker build -t 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest .
+    - docker push 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest
+    - docker rmi -f 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest
     - echo "Done..."
 
 deploy_app:
@@ -20,12 +20,12 @@ deploy_app:
   only:
     - master
   tags:
-    - stgasman
+    - prod_as_manager
   script:
     - echo "Deploy..."
     - if [ "$(docker stack ls | grep ahmad-stack)" ]; then 
         echo "Stack Exists"; 
-        docker service update --force --image registry.carsworld.id/ahmad/hello-node:buildlocal ahmad-stack_microservis;
+        docker service update --force --image 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest ahmad-stack_microservis;
       else
         echo "Stack Not Exists";
         docker stack deploy --with-registry-auth -c docker-compose.yml ahmad-stack;
