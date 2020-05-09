@@ -1,7 +1,7 @@
 version: "3"
 services:
   microservis:
-    image: registry.carsworld.id/ahmad/hello-node:buildlocal
+    image: 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest
     ports:
       - "9910:3000"
     deploy:
