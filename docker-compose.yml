@@ -3,7 +3,7 @@ services:
   microservis:
     image: 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest
     ports:
-      - "9910:3000"
+      - "3120:3000"
     deploy:
       labels:
         - "swarm.autoscaler=true"
