@@ -1,3 +1,5 @@
+before_script
+
 stages:
   - build
   - deploy
@@ -10,6 +12,7 @@ build_app:
     - builder01
   script:
     - echo "Build..."
+    - aws ecr get-login --no-include-email | sh
     - docker build -t 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest .
     - docker push 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest
     - docker rmi -f 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest
