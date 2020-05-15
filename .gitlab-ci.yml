@@ -5,7 +5,7 @@ stages:
 build_app:
   stage: build
   only:
-    - master
+    - eko
   tags:
     - builder01
   script:
