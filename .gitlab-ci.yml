@@ -11,9 +11,9 @@ build_app:
   script:
     - echo "Build..."
     - aws ecr get-login --region ap-southeast-1 --no-include-email | sh
-    - docker build -t 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest-eko .
-    - docker push 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest-eko
-    - docker rmi -f 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest-eko
+    - docker build -t 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest_eko .
+    - docker push 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest_eko
+    - docker rmi -f 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest_eko
     - echo "Done..."
 
 deploy_app:
