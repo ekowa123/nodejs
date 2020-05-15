@@ -1,6 +1,6 @@
 stages:
   - build
-  - deploy
+#  - deploy
 
 build_app:
   stage: build
@@ -11,26 +11,26 @@ build_app:
   script:
     - echo "Build..."
     - aws ecr get-login --region ap-southeast-1 --no-include-email | sh
-    - docker build -t 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latesteko .
-    - docker push 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latesteko
-    - docker rmi -f 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latesteko
+    - docker build -t 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest-eko .
+    - docker push 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest-eko
+    - docker rmi -f 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest-eko
     - echo "Done..."
 
-deploy_app:
-  stage: deploy
-  only:
-    - master
-  tags:
-    - cw_prod_as_manager
-  when: manual
-  script:
-    - echo "Deploy..."
-    - aws ecr get-login --region ap-southeast-1 --no-include-email | sh
-    - if [ "$(docker stack ls | grep ahmad-stack)" ]; then 
-        echo "Stack Exists"; 
-        docker service update --with-registry-auth --force --image 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest ahmad-stack_microservis;
-      else
-        echo "Stack Not Exists";
-        docker stack deploy --with-registry-auth -c docker-compose.yml ahmad-stack;
-      fi
-    - echo "Done..."
+#deploy_app:
+#  stage: deploy
+#  only:
+#    - master
+#  tags:
+#    - cw_prod_as_manager
+#  when: manual
+#  script:
+#    - echo "Deploy..."
+#    - aws ecr get-login --region ap-southeast-1 --no-include-email | sh
+#    - if [ "$(docker stack ls | grep ahmad-stack)" ]; then 
+#        echo "Stack Exists"; 
+#        docker service update --with-registry-auth --force --image 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest ahmad-stack_microservis;
+#      else
+#        echo "Stack Not Exists";
+#        docker stack deploy --with-registry-auth -c docker-compose.yml ahmad-stack;
+#      fi
+ #   - echo "Done..."
