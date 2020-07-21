@@ -61,4 +61,8 @@ router.get('/semua', function(req, res, next) {
   res.json({status: 200, message: 'Welcome Ahmad Ardiansyah.'});
 });
 
+router.get('/ok', function(req, res, next) {
+  res.json({status: 200, message: 'API OK 200.'});
+});
+
 module.exports = router;
