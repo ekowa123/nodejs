@@ -10,8 +10,13 @@ build_development:
     - cw_dev_docker
   script:
     - echo "Build..."
-    - docker rm -f dev_hello_node
-    - docker rmi -f dev/hello-node:latest
+    - if [ "$(docker ps -a | grep dev_hello_node)" ]; then
+        echo "Container Exists";
+        docker rm -f dev_hello_node;
+        docker rmi -f dev/hello-node:latest;
+      else
+        echo "Container Not Found";
+      fi
     - docker build -t dev/hello-node:latest .
     - echo "Done..."
 
@@ -23,7 +28,7 @@ deploy_development:
     - cw_dev_docker
   script:
     - echo "Deploy..."
-    - docker run -dit --name dev_hello_node -p 3000:3000 dev/hello-node:latest
+    - docker run -dit --name dev_hello_node -p 3010:3000 dev/hello-node:latest
     - echo "Done..."
 
 build_staging:
@@ -34,8 +39,13 @@ build_staging:
     - cw_stg_docker
   script:
     - echo "Build..."
-    - docker rm -f stg_hello_node
-    - docker rmi -f stg/hello-node:latest
+    - if [ "$(docker ps -a | grep stg_hello_node)" ]; then
+        echo "Container Exists";
+        docker rm -f stg_hello_node
+        docker rmi -f stg/hello-node:latest
+      else
+        echo "Container Not Found";
+      fi
     - docker build -t stg/hello-node:latest .
     - echo "Done..."
 
@@ -47,5 +57,5 @@ deploy_staging:
     - cw_stg_docker
   script:
     - echo "Deploy..."
-    - docker run -dit --name stg_hello_node -p 3000:3000 stg/hello-node:latest
+    - docker run -dit --name stg_hello_node -p 3010:3000 stg/hello-node:latest
     - echo "Done..."
