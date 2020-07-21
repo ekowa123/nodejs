@@ -28,7 +28,7 @@ deploy_development:
     - cw_dev_docker
   script:
     - echo "Deploy..."
-    - docker run -dit --name dev_hello_node -p 3000:3000 dev/hello-node:latest
+    - docker run -dit --name dev_hello_node -p 3010:3000 dev/hello-node:latest
     - echo "Done..."
 
 build_staging:
@@ -57,5 +57,5 @@ deploy_staging:
     - cw_stg_docker
   script:
     - echo "Deploy..."
-    - docker run -dit --name stg_hello_node -p 3000:3000 stg/hello-node:latest
+    - docker run -dit --name stg_hello_node -p 3010:3000 stg/hello-node:latest
     - echo "Done..."
