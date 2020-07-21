@@ -41,8 +41,8 @@ build_staging:
     - echo "Build..."
     - if [ "$(docker ps -a | grep stg_hello_node)" ]; then
         echo "Container Exists";
-        docker rm -f stg_hello_node
-        docker rmi -f stg/hello-node:latest
+        docker rm -f stg_hello_node;
+        docker rmi -f stg/hello-node:latest;
       else
         echo "Container Not Found";
       fi
