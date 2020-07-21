@@ -10,7 +10,7 @@ build_development:
     - cw_dev_docker
   script:
     - echo "Build..."
-    - if [ "$(docker ps ls | grep dev_hello_node)" ]; then
+    - if [ "$(docker ps -a | grep dev_hello_node)" ]; then
         echo "Container Exists";
         docker rm -f dev_hello_node;
         docker rmi -f dev/hello-node:latest;
@@ -39,7 +39,7 @@ build_staging:
     - cw_stg_docker
   script:
     - echo "Build..."
-    - if [ "$(docker ps ls | grep stg_hello_node)" ]; then
+    - if [ "$(docker ps -a | grep stg_hello_node)" ]; then
         echo "Container Exists";
         docker rm -f stg_hello_node
         docker rmi -f stg/hello-node:latest
