@@ -65,4 +65,8 @@ router.get('/ok', function(req, res, next) {
   res.json({status: 200, message: 'API OK 200.'});
 });
 
+router.get('/eko', function(req, res, next) {
+  res.json({status: 200, message: 'API EKO 200.'});
+});
+
 module.exports = router;
