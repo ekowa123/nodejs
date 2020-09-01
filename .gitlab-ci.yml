@@ -68,7 +68,5 @@ test_dev:
   tags:
     - auto_test_mobile
   script:
-    - pwd
-    - echo $USER
-    - flutter --version
-    - cd /Users/carsworldindonesia/Documents/FlutterProjects/workshop-carsworld
+    - echo "Auto Test"
+    - cd /Users/carsworldindonesia/Documents/FlutterProjects/workshop-carsworld && flutter driver --target=test_driver/login/login.dart
