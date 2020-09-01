@@ -1,6 +1,7 @@
 stages:
   - build
   - deploy
+  - test
 
 build_development:
   stage: build
@@ -59,3 +60,13 @@ deploy_staging:
     - echo "Deploy..."
     - docker run -dit --name stg_hello_node -p 3010:3000 stg/hello-node:latest
     - echo "Done..."
+    
+test_dev:
+  stage: test
+  only:
+    - development
+  tags:
+    - auto_test_mobile
+  script:
+    - pwd
+    - cd /Users/carsworldindonesia/Documents/FlutterProjects/workshop-carsworld
