@@ -69,5 +69,6 @@ test_dev:
     - auto_test_mobile
   script:
     - pwd
+    - echo $USER
     - flutter --version
     - cd /Users/carsworldindonesia/Documents/FlutterProjects/workshop-carsworld
