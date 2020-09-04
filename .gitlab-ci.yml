@@ -2,71 +2,82 @@ stages:
   - build
   - deploy
   - test
-
-build_development:
+  
+build_dev:
   stage: build
   only:
     - development
   tags:
-    - cw_dev_docker
+    - auto-test-mobile-flut
   script:
-    - echo "Build..."
-    - if [ "$(docker ps -a | grep dev_hello_node)" ]; then
-        echo "Container Exists";
-        docker rm -f dev_hello_node;
-        docker rmi -f dev/hello-node:latest;
-      else
-        echo "Container Not Found";
-      fi
-    - docker build -t dev/hello-node:latest .
-    - echo "Done..."
+    - echo "Hai Runner"
+    - dir
+    - pwd
 
-deploy_development:
-  stage: deploy
-  only:
-    - development
-  tags:
-    - cw_dev_docker
-  script:
-    - echo "Deploy..."
-    - docker run -dit --name dev_hello_node -p 3010:3000 dev/hello-node:latest
-    - echo "Done..."
+#build_development:
+#  stage: build
+#  only:
+#    - development
+#  tags:
+#    - cw_dev_docker
+#  script:
+#    - echo "Build..."
+#    - if [ "$(docker ps -a | grep dev_hello_node)" ]; then
+#        echo "Container Exists";
+#        docker rm -f dev_hello_node;
+#        docker rmi -f dev/hello-node:latest;
+#      else
+#        echo "Container Not Found";
+#      fi
+#    - docker build -t dev/hello-node:latest .
+#    - echo "Done..."
 
-build_staging:
-  stage: build
-  only:
-    - staging
-  tags:
-    - cw_stg_docker
-  script:
-    - echo "Build..."
-    - if [ "$(docker ps -a | grep stg_hello_node)" ]; then
-        echo "Container Exists";
-        docker rm -f stg_hello_node
-        docker rmi -f stg/hello-node:latest
-      else
-        echo "Container Not Found";
-      fi
-    - docker build -t stg/hello-node:latest .
-    - echo "Done..."
+#deploy_development:
+#  stage: deploy
+#  only:
+#    - development
+#  tags:
+#    - cw_dev_docker
+#  script:
+#    - echo "Deploy..."
+#    - docker run -dit --name dev_hello_node -p 3010:3000 dev/hello-node:latest
+#    - echo "Done..."
 
-deploy_staging:
-  stage: deploy
-  only:
-    - staging
-  tags:
-    - cw_stg_docker
-  script:
-    - echo "Deploy..."
-    - docker run -dit --name stg_hello_node -p 3010:3000 stg/hello-node:latest
-    - echo "Done..."
+#build_staging:
+#  stage: build
+#  only:
+#    - staging
+#  tags:
+#    - cw_stg_docker
+#  script:
+#    - echo "Build..."
+#    - if [ "$(docker ps -a | grep stg_hello_node)" ]; then
+#        echo "Container Exists";
+#        docker rm -f stg_hello_node
+#        docker rmi -f stg/hello-node:latest
+#      else
+#        echo "Container Not Found";
+#      fi
+#    - docker build -t stg/hello-node:latest .
+#    - echo "Done..."
+
+#deploy_staging:
+# stage: deploy
+#  only:
+#    - staging
+#  tags:
+#    - cw_stg_docker
+#  script:
+#    - echo "Deploy..."
+#    - docker run -dit --name stg_hello_node -p 3010:3000 stg/hello-node:latest
+#    - echo "Done..."
     
-test_dev:
-  stage: test
-  only:
-    - development
-  tags:
-    - auto_test_mobile
-  script:
-    - echo "Auto Test"
-    - cd /Users/carsworldindonesia/Documents/FlutterProjects/workshop-carsworld && flutter driver --target=test_driver/login/login.dart
+#test_dev:
+#  stage: test
+#  only:
+#    - development
+#  tags:
+#    - auto_test_mobile
+#  script:
+#    - echo "Auto Test"
+#    - cd /Users/carsworldindonesia/Documents/FlutterProjects/workshop-carsworld && flutter driver --target=test_driver/login/login.dart
