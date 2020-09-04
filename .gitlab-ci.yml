@@ -12,7 +12,7 @@ build_dev:
   script:
     - echo "Start Testing..."
     - flutter doctor -v
-    #- cd /home/kiw12/carsworld/workshop-carsworld && flutter drive --target=test_driver/login/login.dart
+    - cd /home/kiw12/carsworld/workshop-carsworld && flutter drive --target=test_driver/login/login.dart
     - echo "Test done..."
 
 #build_development:
