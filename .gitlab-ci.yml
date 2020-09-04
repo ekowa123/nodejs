@@ -10,9 +10,9 @@ build_dev:
   tags:
     - auto_test_ubuntu
   script:
-    - echo "Hai Runner"
-    - dir
-    - pwd
+    - echo "Start Testing..."
+    - cd /home/kiw12/carsworld/workshop-carsworld && flutter drive --target=test_driver/login/login.dart
+    - echo "Test done..."
 
 #build_development:
 #  stage: build
