@@ -11,7 +11,8 @@ build_dev:
     - auto_test_ubuntu
   script:
     - echo "Start Testing..."
-    - cd /home/kiw12/carsworld/workshop-carsworld && flutter drive --target=test_driver/login/login.dart
+    - flutter doctor -v
+    #- cd /home/kiw12/carsworld/workshop-carsworld && flutter drive --target=test_driver/login/login.dart
     - echo "Test done..."
 
 #build_development:
