@@ -8,12 +8,14 @@ build_dev:
   only:
     - development
   tags:
-    - auto_test_ubuntu
+    - auto_test_ubuntu_2
   script:
     - echo "Start Testing..."
-    - cd /home/kiw12/carsworld/workshop-carsworld && flutter doctor -v
-    - cd /home/kiw12/carsworld/workshop-carsworld && flutter drive --target=test_driver/login/login.dart
-    - cd /home/kiw12/carsworld/nada-dering && node main.js "Build, deploy, dan testing telah selesai"
+    - pwd
+    - whoami
+    #- cd /home/kiw12/carsworld/workshop-carsworld && flutter doctor -v
+    #- cd /home/kiw12/carsworld/workshop-carsworld && flutter drive --target=test_driver/login/login.dart
+    #- cd /home/kiw12/carsworld/nada-dering && node main.js "Build, deploy, dan testing telah selesai"
     - echo "Test done..."
 
 #build_development:
