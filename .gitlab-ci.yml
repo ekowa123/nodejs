@@ -8,7 +8,7 @@ build_dev:
   only:
     - development
   tags:
-    - auto_test_ubuntu
+    - auto_test_ubuntu_2
   script:
     - echo "Start Testing..."
     - pwd
