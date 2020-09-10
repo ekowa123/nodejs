@@ -15,7 +15,7 @@ build_dev:
     - whoami
     - export DISPLAY=:0.0
     - echo $DISPLAY
-    - vlc
+    - cd /home/kiw12/carsworld/nada-dering && cvlc musik.mp3
     #- cd /home/kiw12/carsworld/workshop-carsworld && flutter doctor -v
     #- cd /home/kiw12/carsworld/workshop-carsworld && flutter drive --target=test_driver/login/login.dart
     #- cd /home/kiw12/carsworld/nada-dering && node main.js "Build, deploy, dan testing telah selesai"
