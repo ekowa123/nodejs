@@ -11,7 +11,7 @@ build_dev:
     - auto_test_ubuntu
   script:
     - echo "Start Testing..."
-    #- flutter doctor -v
+    - cd /home/kiw12/carsworld/workshop-carsworld && flutter doctor -v
     #- cd /home/kiw12/carsworld/workshop-carsworld && flutter drive --target=test_driver/login/login.dart
     - cd /home/kiw12/carsworld/nada-dering && node main.js "Build, deploy, dan testing telah selesai"
     - echo "Test done..."
