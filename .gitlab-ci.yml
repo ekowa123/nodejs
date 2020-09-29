@@ -1,88 +1,85 @@
 stages:
   - build
   - deploy
-  - test
-  
-build_dev:
+
+build_development:
   stage: build
   only:
     - development
   tags:
-    - auto_test_ubuntu
+    - cw_dev_docker
   script:
-    - echo "Start Testing..."
-    - pwd
-    - whoami
-    - cd /home/kiw12/carsworld/nada-dering && mpg321 musik.mp3
-    #- cd /home/kiw12/carsworld/workshop-carsworld && flutter doctor -v
-    #- cd /home/kiw12/carsworld/workshop-carsworld && flutter drive --target=test_driver/login/login.dart
-    #- cd /home/kiw12/carsworld/nada-dering && node main.js "Build, deploy, dan testing telah selesai"
-    - echo "Test done..."
+    - echo "Build..."
+    - docker rm -f dev_hello_node
+    - docker rmi -f dev/hello-node:latest
+    - docker build -t dev/hello-node:latest .
+    - echo "Done..."
 
-#build_development:
-#  stage: build
-#  only:
-#    - development
-#  tags:
-#    - cw_dev_docker
-#  script:
-#    - echo "Build..."
-#    - if [ "$(docker ps -a | grep dev_hello_node)" ]; then
-#        echo "Container Exists";
-#        docker rm -f dev_hello_node;
-#        docker rmi -f dev/hello-node:latest;
-#      else
-#        echo "Container Not Found";
-#      fi
-#    - docker build -t dev/hello-node:latest .
-#    - echo "Done..."
+deploy_development:
+  stage: deploy
+  only:
+    - development
+  tags:
+    - cw_dev_docker
+  script:
+    - echo "Deploy..."
+    - docker run -dit --name dev_hello_node -p 3333:3000 dev/hello-node:latest
+    - echo "Done..."
 
-#deploy_development:
-#  stage: deploy
-#  only:
-#    - development
-#  tags:
-#    - cw_dev_docker
-#  script:
-#    - echo "Deploy..."
-#    - docker run -dit --name dev_hello_node -p 3010:3000 dev/hello-node:latest
-#    - echo "Done..."
+build_staging:
+  stage: build
+  only:
+    - staging
+  tags:
+    - cw_stg_docker
+  script:
+    - echo "Build..."
+    - docker rm -f stg_hello_node
+    - docker rmi -f stg/hello-node:latest
+    - docker build -t stg/hello-node:latest .
+    - echo "Done..."
 
-#build_staging:
-#  stage: build
-#  only:
-#    - staging
-#  tags:
-#    - cw_stg_docker
-#  script:
-#    - echo "Build..."
-#    - if [ "$(docker ps -a | grep stg_hello_node)" ]; then
-#        echo "Container Exists";
-#        docker rm -f stg_hello_node
-#        docker rmi -f stg/hello-node:latest
-#      else
-#        echo "Container Not Found";
-#      fi
-#    - docker build -t stg/hello-node:latest .
-#    - echo "Done..."
+deploy_staging:
+  stage: deploy
+  only:
+    - staging
+  tags:
+    - cw_stg_docker
+  script:
+    - echo "Deploy..."
+    - docker run -dit --name stg_hello_node -p 3000:3000 stg/hello-node:latest
+    - echo "Done..."
 
-#deploy_staging:
-# stage: deploy
-#  only:
-#    - staging
-#  tags:
-#    - cw_stg_docker
-#  script:
-#    - echo "Deploy..."
-#    - docker run -dit --name stg_hello_node -p 3010:3000 stg/hello-node:latest
-#    - echo "Done..."
-    
-#test_dev:
-#  stage: test
-#  only:
-#    - development
-#  tags:
-#    - auto_test_mobile
-#  script:
-#    - echo "Auto Test"
-#    - cd /Users/carsworldindonesia/Documents/FlutterProjects/workshop-carsworld && flutter driver --target=test_driver/login/login.dart
+build_production:
+  stage: build
+  only:
+    - master
+  tags:
+    - builder01
+  script:
+    - echo "Deploy"
+    - aws ecr get-login --region ap-southeast-1 --no-include-email | sh
+    - docker build -t 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest .
+    - docker push 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ahmad/hello-node:latest
+    - docker rmi -f 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ms-aftersal/iws-mitra:latest
+    - echo "Done..."
+
+
+deploy_production:
+  stage: deploy
+  only:
+    - master
+  tags:
+    - cw_prod_as_manager
+  script:
+    - echo "Deploy"
+    - aws ecr get-login --region ap-southeast-1 --no-include-email | sh
+    - if [ "$(docker stack ls | grep ms-ahmad-node-v1)" ]; then 
+        echo "Stack Exists"; 
+        docker service update --force --with-registry-auth --image 228525134900.dkr.ecr.ap-southeast-1.amazonaws.com/ms-aftersal/iws-mitra:latest ms-ahmad-node-v1_microservis;
+      else
+        echo "Stack Not Exists";
+        docker stack deploy --with-registry-auth -c docker-compose.yml ms-ahmad-node-v1;
+      fi
+    - echo "Done..."
+
