@@ -13,7 +13,7 @@ var SECRET_KEY = '4hm4d_4rd14nsy4h_N0d3';
 var tester = 'Hai';
 var tester2 = 'ahmad';
 
-var lampu = 0;
+var lampu = 1;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
