@@ -13,6 +13,8 @@ var SECRET_KEY = '4hm4d_4rd14nsy4h_N0d3';
 var tester = 'Hai';
 var tester2 = 'ahmad';
 
+var lampu = 0;
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { status: 200, message: 'Welcome to Carsworld Digital Indonesia.', title: 'Hello Ahmad Ardiansyah', hot: OS.hostname()  });
@@ -67,6 +69,14 @@ router.get('/ok', function(req, res, next) {
 
 router.get('/eko', function(req, res, next) {
   res.json({status: 200, message: 'API EKO 200.'});
+});
+
+router.get('/lampu', function(req, res, next) {
+  if(req.query.set) {
+      lampu = req.query.set;
+  }
+  
+  res.json({ status: 200, message: lampu });
 });
 
 module.exports = router;
