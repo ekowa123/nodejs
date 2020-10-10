@@ -2,6 +2,8 @@ var express = require('express');
 var OS = require('os');
 var jwt = require('jsonwebtoken');
 var auth = require('../configs/auth');
+var db = require('../configs/conn');
+
 var router = express.Router();
 
 var TOKEN_BOT = "845430643:AAGDRv1fRcQaEhNKLHLfPY_Ow2qPaSflbjE";
@@ -9,11 +11,6 @@ var TelegramBotClient = require('telegram-bot-client');
 var client = new TelegramBotClient(TOKEN_BOT);
 
 var SECRET_KEY = '4hm4d_4rd14nsy4h_N0d3';
-
-var tester = 'Hai';
-var tester2 = 'ahmad';
-
-var lampu = 1;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -71,12 +68,36 @@ router.get('/eko', function(req, res, next) {
   res.json({status: 200, message: 'API EKO 200.'});
 });
 
-router.get('/lampu', function(req, res, next) {
-  if(req.query.set) {
-      lampu = req.query.set;
-  }
-  
-  res.json({ status: 200, message: lampu });
+router.get('/lampu/:id', function(req, res, next) {
+  db.query(`SELECT uid, isActive FROM lamps WHERE id = ?`, [req.params.id], (error, rows) => {
+  	if(error) res.json({ error: true, result: error });
+
+  	res.json({ error: 200, result: rows.length ? rows[0] : [] });
+  })
+});
+
+router.put('/lampu/:id', function(req, res, next) {
+	db.query(`UPDATE lamps SET uid = ?, isActive = ? WHERE id = ?`, [req.body.uid, req.body.isActive, req.params.id], (error, rows) => {
+		if(error) res.json({ error: true, result: error });
+	  
+	  db.query(`SELECT uid, isActive FROM lamps WHERE id = ?`, [req.params.id], (error, rows) => {
+	  	if(error) res.json({ error: true, result: error });
+
+	  	res.json({ error: 200, result: rows.length ? rows[0] : [] });
+	  })
+	})
+});
+
+router.post('/lampu', function(req, res, next) {
+  db.query(`INSERT INTO lamps (uid, isActive) VALUES (?, ?)`, [req.body.uid, req.body.isActive], (error, rows) => {
+  	if(error) res.json({ error: true, result: error });
+
+  	db.query(`SELECT uid, isActive FROM lamps WHERE id = ?`, [rows.insertId], (error, rows) => {
+	  	if(error) res.json({ error: true, result: error });
+
+	  	res.json({ error: 200, result: rows.length ? rows[0] : [] });
+	  })
+  })
 });
 
 module.exports = router;
