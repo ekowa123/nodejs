@@ -7,6 +7,7 @@
     "test": "mocha ./test/test.js"
   },
   "dependencies": {
+    "@sentry/node": "^5.25.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "cookie-parser": "~1.4.3",
@@ -16,6 +17,7 @@
     "jsonwebtoken": "^8.5.1",
     "mocha": "^6.1.4",
     "morgan": "~1.9.0",
+    "mysql": "^2.18.1",
     "pug": "2.0.0-beta11",
     "telegram-bot-client": "^2.1.1",
     "ws": "^7.3.1"

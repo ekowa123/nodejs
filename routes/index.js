@@ -2,6 +2,8 @@ var express = require('express');
 var OS = require('os');
 var jwt = require('jsonwebtoken');
 var auth = require('../configs/auth');
+var db = require('../configs/conn');
+
 var router = express.Router();
 
 var TOKEN_BOT = "845430643:AAGDRv1fRcQaEhNKLHLfPY_Ow2qPaSflbjE";
@@ -9,9 +11,6 @@ var TelegramBotClient = require('telegram-bot-client');
 var client = new TelegramBotClient(TOKEN_BOT);
 
 var SECRET_KEY = '4hm4d_4rd14nsy4h_N0d3';
-
-var tester = 'Hai';
-var tester2 = 'ahmad';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

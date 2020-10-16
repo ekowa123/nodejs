@@ -2,8 +2,11 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+
   p #{hot}
+  p#domain
+  
+  h1 Gitlab CI/CD
 
   h1 Akses JWT
   ul
@@ -11,3 +14,9 @@ block content
     li check route "/me"
     li passing token with key name "token" on header or query
     li headers['token'] or ?token=
+
+  p Footer Sukses
+
+  script.
+    var dom = window.location.origin;
+    document.getElementById('domain').innerHTML = dom;

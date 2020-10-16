@@ -21,9 +21,12 @@ deploy_development:
     - development
   tags:
     - cw_dev_docker
+  environment:
+    name: "Hello Node Development"
+    url: "https://api.development.carsworld.co.id/v1/hello-node/"
   script:
     - echo "Deploy..."
-    - docker run -dit --name dev_hello_node -p 3000:3000 dev/hello-node:latest
+    - docker run -dit --name dev_hello_node -p 3333:3000 dev/hello-node:latest
     - echo "Done..."
 
 build_staging:
