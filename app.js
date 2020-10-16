@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 const Sentry = require('@sentry/node');
-Sentry.init({ dsn: 'https://9d32d7067e974ac6a36fdfbfcda955b4@sen.carsworld.co.id/2' });
+Sentry.init({ dsn: 'https://4acccf3edee8431f9a5f4de77a86af84@o213929.ingest.sentry.io/5444280' });
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
