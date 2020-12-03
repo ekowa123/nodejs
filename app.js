@@ -10,7 +10,7 @@ Sentry.init({ dsn: 'https://4acccf3edee8431f9a5f4de77a86af84@o213929.ingest.sent
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var WebSocket = require('ws');
+//var WebSocket = require('ws');
 var http = require('http');
 
 // tester untuk update
@@ -18,6 +18,8 @@ var app = express();
 app.disable('x-powered-by');
 
 var server = http.createServer(app);
+
+/**
 var ws = new WebSocket.Server({ server, path: '/ws' });
 ws.on('connection', sc => {
   sc.on('message', data => {
@@ -28,6 +30,7 @@ ws.on('connection', sc => {
     });
   });
 });
+*/
 
 // The request handler must be the first middleware on the app
 app.use(Sentry.Handlers.requestHandler());
