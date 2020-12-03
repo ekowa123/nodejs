@@ -18,6 +18,7 @@ var app = express();
 app.disable('x-powered-by');
 
 var server = http.createServer(app);
+/**
 var ws = new WebSocket({ server, path: '/ws' });
 ws.on('connection', sc => {
   sc.on('message', data => {
@@ -28,6 +29,7 @@ ws.on('connection', sc => {
     });
   });
 });
+*/
 
 // The request handler must be the first middleware on the app
 app.use(Sentry.Handlers.requestHandler());
