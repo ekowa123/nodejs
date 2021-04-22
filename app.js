@@ -5,14 +5,32 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 const Sentry = require('@sentry/node');
-Sentry.init({ dsn: 'https://9d32d7067e974ac6a36fdfbfcda955b4@sen.carsworld.co.id/2' });
+Sentry.init({ dsn: 'https://4acccf3edee8431f9a5f4de77a86af84@o213929.ingest.sentry.io/5444280' });
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+//var WebSocket = require('ws');
+var http = require('http');
+
 // tester untuk update
 var app = express();
 app.disable('x-powered-by');
+
+var server = http.createServer(app);
+
+/**
+var ws = new WebSocket.Server({ server, path: '/ws' });
+ws.on('connection', sc => {
+  sc.on('message', data => {
+    ws.clients.forEach(client => {
+      if(client.readyState === WebSocket.OPEN) {
+        client.send(data);
+      }
+    });
+  });
+});
+*/
 
 // The request handler must be the first middleware on the app
 app.use(Sentry.Handlers.requestHandler());
@@ -57,4 +75,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = {app, server};
